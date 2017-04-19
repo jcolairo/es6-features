@@ -14,7 +14,7 @@ List and summary of es6 Features
 * Classes can be named or unnamed
 
 
-~~~~
+```js
 // unnamed
 
 var Rectangle = class {
@@ -30,7 +30,6 @@ var Rectangle = class {
 };
 
 
-
 // named
 
 var Rectangle = class Rectangle {
@@ -43,7 +42,7 @@ var Rectangle = class Rectangle {
 
   }
 };
-~~~~
+```
 
 ####Enhanced Object Literals
 
@@ -51,7 +50,7 @@ var Rectangle = class Rectangle {
 * It includes everything within `{}`
 * Properties can be called the usual way
 
-~~~~
+~~~~js
 var sales = 'Toyota';
 
 function carTypes(name) {
@@ -79,13 +78,14 @@ console.log(car.special); // Toyota
 
 * Makes it possible to extract data from arrays and objects into distinct variables
 
-~~~~
+~~~~js
+const scores = [10, 20, 30, 40, 50];
 var a, b, rest;
-[a, b] = [10, 20];
+[a, b] = scores;
 console.log(a); // 10
 console.log(b); // 20
 
-[a, b, ...rest] = [10, 20, 30, 40, 50];
+[a, b, ...rest] = scores;
 console.log(a); // 10
 console.log(b); // 20
 console.log(rest); // [30, 40, 50]
@@ -97,7 +97,7 @@ console.log(b); // 20
 
 * It reverses the syntax. The variable is declared on the left hand side and the value is on the right
 
-~~~~
+~~~~js
 var x = [1, 2, 3, 4, 5];
 var [y, z] = x;
 console.log(y); // 1
@@ -109,7 +109,7 @@ console.log(z); // 2
 * Sets the values in a function to default if not stated
 * But otherwise returns the value that the user has inputted as the missing value
 
-~~~~
+~~~~js
 function multiply(a, b = 1) {
   return a * b;
 }
@@ -124,7 +124,7 @@ multiply(5);    // 5
 * If an array ends with `...` then it indicates the user wants to include the 'rest' of the parameters in that array
 * The 'rest' of the values in the array are then printed when they are called
 
-~~~~
+~~~~js
 // Before rest parameters, the following could be found:
 function f(a, b) {
   var args = Array.prototype.slice.call(arguments, f.length);
@@ -144,7 +144,7 @@ function f(a, b, ...args) {
 * This includes an array within another array
 * This is done by calling the first array within the second array
 
-~~~~
+~~~~js
 var parts = ['shoulders', 'knees']; 
 var lyrics = ['head', ...parts, 'and', 'toes']; 
 // ["head", "shoulders", "knees", "and", "toes"]
@@ -156,7 +156,7 @@ var lyrics = ['head', ...parts, 'and', 'toes'];
 * The `var` keyword is a global variable, where `let` is defined locally or within a function
 * It can therefore be used multiple times not overwritting the previous value if the variable is in a different function
 
-~~~~
+~~~~js
 function varTest() {
   var x = 1;
   if (true) {
@@ -182,7 +182,7 @@ function letTest() {
 * It can be declared either globally or locally to a function
 * It must be assigned a value in the same statement as it is declared
 
-~~~~
+~~~~js
 // NOTE: Constants can be declared with uppercase or lowercase, but a common
 // convention is to use all-uppercase letters.
 
@@ -221,9 +221,9 @@ if (MY_FAV === 7) {
 ####for…of Statement
 
 * This function creates a loop iterating over objects (including Array, Map, Set, String, TypedArry)
-* Similar to a for loop but can include a previously mentioned object
+* Similar to a `in` in objects but can include a previously mentioned object
 
-~~~~
+~~~~js
 let iterable = [10, 20, 30];
 
 for (let value of iterable) {
@@ -235,7 +235,7 @@ for (let value of iterable) {
 // 31
 ~~~~
 
-~~~~
+~~~~js
 let iterable = 'boo';
 
 for (let value of iterable) {
@@ -252,7 +252,7 @@ for (let value of iterable) {
 * The `*` syntax is used to indicate a generator function
 * The `next()` method returns the values when they are printed out
 
-~~~~
+~~~~js
 function* anotherGenerator(i) {
   yield i + 1;
   yield i + 2;
@@ -284,11 +284,11 @@ console.log(gen.next().value); // 20
 * When a file can be imported to a different file
 * When functions, objects or pimitives from a file can be exported to a different location
 
-~~~~
+~~~~js
 import * as myModule from 'my-module';
 ~~~~
 
-~~~~
+~~~~js
 export { myFunction }; // exports a function declared earlier
 export const foo = Math.sqrt(2); // exports a constant
 ~~~~
@@ -303,7 +303,7 @@ export const foo = Math.sqrt(2); // exports a constant
 	+ Compilation hooks
 	+ Nested virtualisation
 
-~~~~
+~~~~js
 // Dynamic loading – ‘System’ is default loader
 System.import('lib/math').then(function(m) {
   alert("2π = " + m.sum(m.pi, m.pi));
@@ -339,10 +339,6 @@ System.set('jquery', Module({$: $})); // WARNING: not yet finalized
  + it is unique
  + they are not arbitrary values unlike sets
 
-####Proxies
-
-* 
-
 ####Symboles
 
 * Every symbol value returned from `Symbol()` is unique
@@ -356,7 +352,7 @@ System.set('jquery', Module({$: $})); // WARNING: not yet finalized
  + Invoke constructor on new instances to initiase
 * The known `@@create` symbol is available via `Symbol.create`
 
-~~~~
+~~~~js
 // Pseudo-code of Array
 class Array {
     constructor(...args) { /* ... */ }
@@ -398,7 +394,7 @@ arr.length == 2
 * Binary
  + The user uses an upper or lowercase b after a 0 to indicate they want to use binary syntax
  
-~~~~
+~~~~js
 var FLT_SIGNBIT  = 0b10000000000000000000000000000000; // 2147483648
 var FLT_EXPONENT = 0b01111111100000000000000000000000; // 2139095040
 var FLT_MANTISSA = 0B00000000011111111111111111111111; // 8388607
@@ -407,15 +403,15 @@ var FLT_MANTISSA = 0B00000000011111111111111111111111; // 8388607
 * Octal
  + The user uses an upper or lowercase o after a 0 to indicate they want to use the octal syntax
 
-~~~~
+~~~~js
 var n = 0O755; // 493
 var m = 0o644; // 420
 ~~~~
 
-####Reflect API
+```
+something here
+```
 
-* 
-* Reflect is not a function object and is not a constructor
 
 ####Tail Calls
 
